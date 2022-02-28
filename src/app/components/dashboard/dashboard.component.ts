@@ -19,18 +19,38 @@ export class DashboardComponent implements OnInit {
     'action',
   ];
   dataSource: any;
-  constructor(private adminService: AdminService, private authService: AuthService) {}
+  users: Array<any> = [];
+  bands: Array<any> = [];
+  usersTotal: number = 0;
+  bandsTotal: number = 0
+  constructor(
+    private adminService: AdminService,
+    private authService: AuthService
+  ) {}
   ngOnInit(): void {
     this.listApplicationUsers();
   }
   listApplicationUsers() {
-    this.getUsers()
+    this.getTotal();
+    this.getUsers();
+  }
+
+  getTotal() {
+    this.adminService.getUsers().subscribe(({ data }) => {
+      console.log(data.length);
+      this.users.push(data);
+      this.usersTotal = data.length
+    });
+    this.adminService.getBands().subscribe(({ data }) => {
+      console.log(data.length);
+      this.bands.push(data);
+      this.bandsTotal = data.length
+    });
   }
 
   getUsers() {
     this.adminService.getUsers().subscribe((users) => {
       this.dataSource = users.data;
-      console.log(this.dataSource);
     });
   }
   getBands() {
@@ -44,13 +64,13 @@ export class DashboardComponent implements OnInit {
     this.adminService.delete(id).subscribe((res) => {
       try {
         alert('Usuario eliminado');
-        this.getUsers()
+        this.getUsers();
       } catch (err) {
         console.log(err);
       }
     });
   }
-  logout(){
-    this.authService.SignOut()
+  logout() {
+    this.authService.SignOut();
   }
 }
