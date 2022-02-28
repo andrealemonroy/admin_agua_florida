@@ -1,0 +1,77 @@
+<div class="flex align-middle h-screen">
+  <div
+    class="basis-1/2 bg-primary h-full flex align-middle justify-center m-auto"
+  >
+    <div class="w-full max-w-xs m-auto">
+      <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <h3 class="text-2xl mb-4">Iniciar sesión</h3>
+        <div class="mb-4">
+          <label
+            class="block text-gray-700 text-sm font-bold mb-2"
+            for="username"
+          >
+            Correo electrónico
+          </label>
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="username"
+            #userName
+            type="email"
+            placeholder="Correo electrónico"
+          />
+        </div>
+        <div class="mb-6">
+          <label
+            class="block text-gray-700 text-sm font-bold mb-2"
+            for="password"
+          >
+            Clave
+          </label>
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+            id="password"
+            #userPassword
+            type="password"
+            placeholder="******************"
+          />
+        </div>
+        <div class="flex items-center justify-around">
+          <input
+            class="cursor-pointer bg-mmPurple hover:bg-blue-700 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline w-60"
+            type="button"
+            value="Ingresa"
+            (click)="signIn(userName.value, userPassword.value)"
+          >
+          <a
+            class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800 text-center"
+            routerLink="/forgot-password"
+          >
+            Recupera tu clave
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="basis-1/2 flex flex-col justify-center align-middle m-auto">
+    <div class="mx-auto">
+      <img src="../../../assets/logoMapa.svg" class="w-24" />
+    </div>
+    <div class="mx-auto text-center text-mmPurple text-6xl">
+      <h2 class="font-light">¡Bienvenida!</h2>
+    </div>
+    <div class="mx-auto">
+      <p class="text-center text-mmPurple text-xl">
+        al Administrador de Mujeres Musicas <br />de Agua Florida
+      </p>
+    </div>
+    <div class="mx-auto mt-5">
+      <a routerLink="/register-user">
+        <div
+          class="bg-mmPurple px-6 py-2 text-white font-black font-franklin text-lg"
+        >
+          REGÍSTRATE
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,102 @@
+
+
+  <body>
+    <div
+      class="flex h-screen bg-gray-50 bg-primary overflow-hidden"
+    >
+      <div class="flex flex-col flex-1 w-full">
+        <header class="z-10 py-4 bg-mmPurple">
+          <div
+            class="container flex items-center justify-between h-full px-6 mx-auto text-purple-600 text-purple-300"
+          >
+            <ul class="flex justify-end space-x-6 w-full">
+              <div (click)="logout()" class="cursor-pointer">Cerrar sesión</div>
+
+              <!-- Profile menu -->
+              <li class="relative">
+                <button
+                  class="align-middle rounded-full focus:shadow-outline-purple focus:outline-none"
+                  aria-label="Account"
+                  aria-haspopup="true"
+                >
+                  <img
+                    class="object-cover w-8 h-8 rounded-full"
+                    src="../../../assets/logoMapa.svg"
+                    alt=""
+                    aria-hidden="true"
+                  />
+                </button>
+              </li>
+            </ul>
+          </div>
+        </header>
+        <main class="h-full overflow-y-auto">
+          <div class="container px-6 mx-auto grid">
+            <h2
+              class="my-6 text-2xl font-semibold text-gray-700 text-gray-200"
+            >
+              Dashboard
+            </h2>
+            <div class="mb-2">
+              <button class="bg-mmPurple px-6 py-2 text-white font-black font-franklin text-lg" (click)="getUsers()">SOLISTAS</button>
+              <button class="bg-mmPurple px-6 py-2 text-white font-black font-franklin text-lg ml-2" (click)="getBands()">BANDAS</button>
+            </div>
+            <div class="example-container mat-elevation-z8">
+
+
+              <div class="example-table-container">
+            
+                <table mat-table [dataSource]="dataSource" class="example-table"
+                       matSort matSortActive="created" matSortDisableClear matSortDirection="desc">
+                  <!-- Number Column -->
+                  <ng-container matColumnDef="fullName">
+                    <th mat-header-cell *matHeaderCellDef>Nombre</th>
+                    <td mat-cell *matCellDef="let row">{{row.fullName}}</td>
+                  </ng-container>
+            
+                  <!-- Title Column -->
+                  <ng-container matColumnDef="artisticName">
+                    <th mat-header-cell *matHeaderCellDef>N. Artístico</th>
+                    <td mat-cell *matCellDef="let row">{{row.artisticName}}</td>
+                  </ng-container>
+            
+                  <!-- State Column -->
+                  <ng-container matColumnDef="location">
+                    <th mat-header-cell *matHeaderCellDef>Lugar</th>
+                    <td mat-cell *matCellDef="let row">{{row.location.value}}</td>
+                  </ng-container>
+            
+                  <ng-container matColumnDef="role">
+                    <th mat-header-cell *matHeaderCellDef>Rol</th>
+                    <td mat-cell *matCellDef="let row">{{row.role}}</td>
+                  </ng-container>
+            
+                  <ng-container matColumnDef="email">
+                    <th mat-header-cell *matHeaderCellDef>Email</th>
+                    <td mat-cell *matCellDef="let row">{{row.email}}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="projects">
+                    <th mat-header-cell *matHeaderCellDef>Proyectos</th>
+                    <td mat-cell *matCellDef="let row">{{row.projects}}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="socialNetworks">
+                    <th mat-header-cell *matHeaderCellDef>Redes sociales</th>
+                    <td mat-cell *matCellDef="let row">{{row.socialNetworks.facebook}},{{row.socialNetworks.instagram}}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef>Eliminar</th>
+                    <td mat-cell *matCellDef="let row"><button (click)="delete(row._id)">Eliminar</button></td>
+                  </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+              </div>
+            
+              <!-- <mat-paginator [length]="resultsLength" [pageSize]="30" aria-label="Select page of GitHub search results"></mat-paginator> -->
+            </div>
+            
+          </div>
+        </main>
+      </div>
+    </div>
+  </body>
