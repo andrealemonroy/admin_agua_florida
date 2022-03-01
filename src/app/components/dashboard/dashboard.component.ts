@@ -55,10 +55,8 @@ export class DashboardComponent implements OnInit {
   }
   getBands() {
     this.user = false;
-    console.log('2', this.dataSource);
     this.adminService.getBands().subscribe((bands) => {
       this.dataSource = bands.data;
-      console.log(this.dataSource);
     });
   }
   delete(id: string) {
