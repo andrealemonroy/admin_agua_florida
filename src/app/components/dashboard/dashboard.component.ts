@@ -22,7 +22,8 @@ export class DashboardComponent implements OnInit {
   users: Array<any> = [];
   bands: Array<any> = [];
   usersTotal: number = 0;
-  bandsTotal: number = 0
+  bandsTotal: number = 0;
+  user: boolean = true;
   constructor(
     private adminService: AdminService,
     private authService: AuthService
@@ -37,38 +38,49 @@ export class DashboardComponent implements OnInit {
 
   getTotal() {
     this.adminService.getUsers().subscribe(({ data }) => {
-      console.log(data.length);
       this.users.push(data);
-      this.usersTotal = data.length
+      this.usersTotal = data.length;
     });
     this.adminService.getBands().subscribe(({ data }) => {
-      console.log(data.length);
       this.bands.push(data);
-      this.bandsTotal = data.length
+      this.bandsTotal = data.length;
     });
   }
 
   getUsers() {
+    this.user = true;
     this.adminService.getUsers().subscribe((users) => {
       this.dataSource = users.data;
     });
   }
   getBands() {
+    this.user = false;
+    console.log('2', this.dataSource);
     this.adminService.getBands().subscribe((bands) => {
       this.dataSource = bands.data;
       console.log(this.dataSource);
     });
   }
   delete(id: string) {
-    console.log(id);
-    this.adminService.delete(id).subscribe((res) => {
-      try {
-        alert('Usuario eliminado');
-        this.getUsers();
-      } catch (err) {
-        console.log(err);
-      }
-    });
+    this.user
+      ? this.adminService.deleteUser(id).subscribe((res) => {
+          try {
+            alert('Usuario eliminado');
+            this.getUsers();
+          } catch (err) {
+            console.log(err);
+          }
+        })
+      : this.adminService.deleteBand(id).subscribe((res) => {
+          try {
+            alert('Banda eliminada');
+            this.getBands();
+          } catch (err) {
+            console.log(err);
+          }
+        });
+
+        this.getTotal()
   }
   logout() {
     this.authService.SignOut();

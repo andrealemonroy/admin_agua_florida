@@ -23,7 +23,10 @@ export class AdminService {
         return this.http.get(`${this.baseUrl}/bands`) 
         // return this.http.post(`${this.baseUrl}/api/rtg`, data)
     };
-    delete(id: string):Observable<any>{
+    deleteUser(id: string):Observable<any>{
         return this.http.delete(`${this.baseUrl}/users/${id}`)
+    }
+    deleteBand(id: string):Observable<any>{
+        return this.http.delete(`${this.baseUrl}/bands/${id}`)
     }
 }
